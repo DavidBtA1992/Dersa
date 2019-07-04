@@ -1,0 +1,31 @@
+#include "Arduino.h"
+#include <Wire.h>
+#include <Adafruit_INA219.h> // You will need to download this library
+
+Adafruit_INA219 sensor219; // Declare and instance of INA219
+
+
+void setup(void) 
+{
+  /////////////////////////////////////////////////////////
+  Serial.begin(115200);    
+  sensor219.begin();
+  sensor219.setCalibration_16V_400mA();
+  float serial_data [n];
+ 
+}
+
+void loop(void) 
+{
+  int n = 0;
+  float current = 0; // Medida en mA
+  
+do {
+ current = sensor219.getCurrent_mA();
+ serial_data[n] = current;
+ Serial.write(serial_data[n]);
+ n=n+1;
+ delay(1000);
+ }
+ while (n<1000);
+}
